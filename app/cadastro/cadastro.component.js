@@ -13,10 +13,25 @@ var core_1 = require("@angular/core");
 var foto_component_1 = require("../foto/foto.component");
 var forms_1 = require("@angular/forms");
 var foto_service_1 = require("../foto/foto.service");
+var router_1 = require("@angular/router");
 var CadastroComponent = /** @class */ (function () {
-    function CadastroComponent(servico, fb) {
+    function CadastroComponent(servico, fb, route, router) {
+        var _this = this;
         this.foto = new foto_component_1.FotoComponent();
         this.servico = servico;
+        this.route = route;
+        this.router = router;
+        this.route.params.subscribe(function (params) {
+            var id = params['id'];
+            if (id) {
+                _this.servico.buscaPorId(id)
+                    .subscribe(function (foto) {
+                    return _this.foto = foto;
+                }, function (error) {
+                    return console.log(error);
+                });
+            }
+        });
         this.meuForm = fb.group({
             titulo: ['', forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.minLength(4)])],
             url: ['', forms_1.Validators.required],
@@ -31,6 +46,7 @@ var CadastroComponent = /** @class */ (function () {
             .subscribe(function () {
             console.log('Foto Cadastrada com sucesso!');
             _this.foto = new foto_component_1.FotoComponent();
+            _this.router.navigate(['']);
         }, function (error) { return console.log(error); });
     };
     CadastroComponent = __decorate([
@@ -39,7 +55,7 @@ var CadastroComponent = /** @class */ (function () {
             selector: 'cadastro',
             templateUrl: './cadastro.component.html'
         }),
-        __metadata("design:paramtypes", [foto_service_1.FotoService, forms_1.FormBuilder])
+        __metadata("design:paramtypes", [foto_service_1.FotoService, forms_1.FormBuilder, router_1.ActivatedRoute, router_1.Router])
     ], CadastroComponent);
     return CadastroComponent;
 }());
