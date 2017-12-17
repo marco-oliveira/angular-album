@@ -17,6 +17,7 @@ var cadastro_component_1 = require("./cadastro/cadastro.component");
 var listagem_component_1 = require("./listagem/listagem.component");
 var app_routes_1 = require("./app.routes");
 var forms_1 = require("@angular/forms");
+var botao_module_1 = require("./botao/botao.module");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -28,7 +29,8 @@ var AppModule = /** @class */ (function () {
                 painel_module_1.PainelModule,
                 app_routes_1.routing,
                 forms_1.FormsModule,
-                forms_1.ReactiveFormsModule
+                forms_1.ReactiveFormsModule,
+                botao_module_1.BotaoModule
             ],
             declarations: [app_component_1.AppComponent, cadastro_component_1.CadastroComponent, listagem_component_1.ListagemComponent],
             bootstrap: [app_component_1.AppComponent]
